@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { signupUser } from "../Redux/authSlice";
+import { useNavigate } from "react-router-dom";
 import { BsFillPatchCheckFill } from "react-icons/bs";
 import { MdError } from "react-icons/md";
 import { ImSpinner3 } from "react-icons/im";
@@ -15,6 +16,7 @@ const Signup = () => {
   const [userInfo, setUserInfo] = useState(initialState);
   const [showToast, setShowToast] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,6 +29,9 @@ const Signup = () => {
     dispatch(signupUser(userInfo)).then((res) => {
       if (res.type === "Authentication/loginSuccess") {
         setShowToast(res.payload.res);
+        setTimeout(() => {
+          navigate("/");
+        }, 1000);
       } else {
         setShowToast(res.payload);
       }

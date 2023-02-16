@@ -1,15 +1,25 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
+  const { token } = useSelector((store) => store.auth);
+  // console.log("token:", token);
+
   return (
     <NavBar>
       <div>Map View</div>
       <div>
-        <div>Login</div>
-        <div>Signup</div>
-        <div>Dashboard</div>
-        <div>Logout</div>
+        <Link to={"/dashboard"}>Dashboard</Link>
+        {!token ? (
+          <>
+            <Link to={"/"}>Login</Link>
+            <Link to={"/signup"}>Signup</Link>
+          </>
+        ) : (
+          <div>Logout</div>
+        )}
       </div>
     </NavBar>
   );
@@ -28,6 +38,10 @@ const NavBar = styled.nav`
   & > div:nth-child(2) {
     display: flex;
     gap: 10px;
+    & > a {
+      color: white;
+      text-decoration: none;
+    }
   }
 `;
 
