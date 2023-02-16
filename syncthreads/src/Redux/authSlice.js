@@ -26,11 +26,19 @@ const authSlice = createSlice({
       state.isLoading = false;
       state.isError = false;
     },
+    logOut(state, action) {
+      state.token = null;
+    },
   },
 });
 
-export const { processingRequest, errorlog, signupSuccess, loginSuccess } =
-  authSlice.actions;
+export const {
+  processingRequest,
+  errorlog,
+  signupSuccess,
+  loginSuccess,
+  logOut,
+} = authSlice.actions;
 
 export const loginUser = (payload) => (dispatch) => {
   console.log("payload:", payload);

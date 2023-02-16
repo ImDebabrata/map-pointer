@@ -1,9 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { logOut } from "../Redux/authSlice";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
   const { token } = useSelector((store) => store.auth);
   // console.log("token:", token);
 
@@ -18,7 +20,7 @@ const Navbar = () => {
             <Link to={"/signup"}>Signup</Link>
           </>
         ) : (
-          <div>Logout</div>
+          <div onClick={() => dispatch(logOut())}>Logout</div>
         )}
       </div>
     </NavBar>
@@ -41,6 +43,9 @@ const NavBar = styled.nav`
     & > a {
       color: white;
       text-decoration: none;
+    }
+    & > div {
+      cursor: pointer;
     }
   }
 `;
