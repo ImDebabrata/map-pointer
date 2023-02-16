@@ -5,7 +5,6 @@ const { connection } = require("./config/db");
 const { loginRouter } = require("./routes/login.route");
 const { signupRouter } = require("./routes/signup.route");
 const { todoRouter } = require("./routes/todo.route");
-const { verifyToken } = require("./middleware/verifyToken");
 
 const app = express();
 const PORT = process.env.PORT;
@@ -13,12 +12,11 @@ const PORT = process.env.PORT;
 app.use(express.json());
 app.use(cors());
 app.get("/", (req, res) => {
-  res.send("Welcome to the todo app server");
+  res.send("Welcome to the Map view app server");
 });
 
 app.use("/login", loginRouter);
 app.use("/signup", signupRouter);
-app.use(verifyToken);
 app.use("/todo", todoRouter);
 
 app.listen(PORT, async () => {
